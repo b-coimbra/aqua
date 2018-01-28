@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="charset">
+    <meta name="author" content="Bruno Coimbra - https://github.com/0-l/">
+    <meta name="viewport" content="initial-scale=1, user-scalable=no, width=device-width, height=device-height">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>~</title>
+</head>
+<body>
+    <div id="search">
+        <div>
+            <input type="text" spellcheck="false" placeholder="search">
+            <button class="close"><i class="material-icons">&#xE5CD;</i></button>
+            <ul class="search-engines"></ul>
+        </div>
+    </div>
+    <div id="container">
+        <div class="wrapper">
+            <div class="clock">
+                <div class="time">
+                    <p hour></p>
+                    <p mins></p>
+                    <p ord></p>
+                </div>
+                <div class="weather">
+                    <p>6&ordm;</p>
+                </div>
+            </div>
+            <div class="panel">
+                <ul class="tabs">
+                    <li><a href="#home"><i class="material-icons">menu</i></a></li>
+                    <li><a href="#favorites"><i class="material-icons">favorite_border</i></a></li>
+                    <li><a href="#music"><i class="material-icons">headset</i></a></li>
+                    <li><a href="#config"><i class="material-icons">settings</i></a></li>
+                </ul>
+                <div class="pages">
+                    <div id="home">
+                        <ul>
+<!--                        <li><a href="https://youtube.com/" target="_blank">youtube</a></li>
+                            <li><a href="https://messenger.com/" target="_blank">messenger</a></li>
+                            <li><a href="https://4chan.org/" target="_blank">4chan</a></li>
+                            <li><a href="https://github.com/" target="_blank">github</a></li>
+                            <li><a href="https://drive.google.com/" target="_blank">drive</a></li> -->
+                        </ul>
+                    </div>
+                    <div id="favorites">
+                        <ul>
+                            <li><a href="https://boards.4chan.org/g/" target="_blank">/g/</a></li>
+                            <li><a href="https://lainchan.org/lambda/" target="_blank">/λ/</a></li>
+                            <li><a href="https://8ch.net/tech/" target="_blank">/tech/</a></li>
+                            <li><a href="https://boards.420chan.org/prog/" target="_blank">/prog/</a></li>
+                            <li><a href="https://sushigirl.us/silicon/index.html" target="_blank">/silicon/</a></li>
+                            <li><a href="https://news.ycombinator.com/" target="_blank">Y combinator</a></li>
+                        </ul>
+                    </div>
+                    <div id="music">
+                        <ul>
+                            <li><a href="https://soundcloud.com/" target="_blank">soundcloud</a></li>
+                        </ul> 
+                    </div>
+                    <div id="config">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/strftime.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
