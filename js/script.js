@@ -64,24 +64,4 @@ const $A = (e) => document.querySelectorAll(e);
     setTime($('p[hour]'), strftime('h'));
     setTime($('p[mins]'), strftime(':M'));
     setTime($('p[ord]'),  strftime('p'));
-
-    function httpGet(url) {
-        let xmlHttp  = new XMLHttpRequest();
-
-        xmlHttp.onreadystatechange = () => {
-            if (this.readyState == 4 && this.status == 200)
-                callback(xmlHttp.responseText);
-        }
-        xmlHttp.open("GET", url, true); // true for asynchronous 
-        xmlHttp.send(null);
-    }
-
-    function weather() {
-        let location = "Sao Paulo";
-        let query = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=50a34e070dd5c09a99554b57ab7ea7e2`;
-
-        console.log(JSON.parse(httpGet(query)));
-    }
-
-    weather();
 })();

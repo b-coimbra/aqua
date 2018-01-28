@@ -281,7 +281,7 @@ body {
 }
 
 .pages > div ul {
-    width: 80%;
+    width: 70%;
     margin: 2em 0 0 1em;
 }
 
@@ -289,7 +289,7 @@ body {
     position: relative;
     width: 100%;
     background: #fff;
-    padding: .5em;
+    padding: .6em 0 .6em 1em;
     border-radius: 2px;
     margin-bottom: 2px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, .1);
