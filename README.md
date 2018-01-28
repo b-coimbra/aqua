@@ -1,6 +1,8 @@
 # Aqua
 
-WIP
+Work in progress.
+
+[Live preview](https://0-l.github.io/aqua/?)
 
 ## Preview
 
