@@ -6,4 +6,4 @@ Work in progress.
 
 ## Preview
 
-![preview](https://i.imgur.com/OCsk53G.png)
+![preview](https://i.imgur.com/o3HYBKL.png)
