@@ -5,24 +5,6 @@
     src: url('../fonts/LemonMilk.ttf') format('truetype');
 }
 
-@font-face {
-    font-family: 'Roboto';
-    src: url('../fonts/Roboto-bold.ttf') format('truetype');
-    font-weight: bold;
-}
-
-@font-face {
-    font-family: 'Roboto';
-    src: url('../fonts/Roboto-light.ttf') format('truetype');
-    font-weight: normal;
-}
-
-@font-face {
-    font-family: 'Roboto';
-    src: url('../fonts/Roboto-regular.ttf') format('truetype');
-    font-weight: normal;
-}
-
 :root {
     --accent: #76dedf;
 }
@@ -52,6 +34,7 @@
 body {
     background: linear-gradient(#f1f1f1, #fff);
     height: 100vh;
+    overflow: hidden;
 }
 
 [class^='\5f'], .wrapper {
@@ -88,11 +71,11 @@ body {
 }
 
 .time p[hour], .time p[ord] {
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .time p[mins] {
-    font-weight: 100;
+    font-weight: 300;
 }
 
 .clock .weather {
@@ -115,14 +98,17 @@ body {
     left: 0;
     right: 0;
     height: 555px;
-    width: 350px;
+    width: 400px;
     margin: auto;
+    z-index: 1;
 }
 
 .panel {
+    margin: 1em 0 0;
     height: 460px;
     background: url('../img/background.gif') center / cover;
     box-shadow: 0 5px 5px rgba(0, 0, 0, .15);
+    overflow: hidden;
 }
 
 .panel::after {
@@ -136,51 +122,93 @@ body {
 }
 
 .tabs {
+    height: 100%;
+    width: 100%;
     display: flex;
-    height: 50px;
-    background: #fff;
-    margin: 1em 0 0;
+    position: relative;
 }
 
-.tabs li {
+.tabs .tab ul {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow-x: scroll;
+}
+
+.tabs .tab ul::-webkit-scrollbar {
+    width: 3px;
+    background: rgba(0, 0, 0, .3);
+}
+
+.tabs .tab ul::-webkit-scrollbar-thumb {
+    background: #fff;
+}
+
+.tab {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    max-height: 90%;
+    overflow-y: hidden;
+}
+
+.tab i {
     --size: -4px;
     --tab: #838b95;
     cursor: pointer;
-    width: 50%;
-    height: 100%;
+    width: 100%;
+    height: 50px;
     background: #fff;
     box-shadow: inset 0 var(--size) var(--tab);
     transition: all .3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
 }
 
-.tabs li a {
+.tab ul a {
+    --slide: -50px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #444;
     width: 100%;
-    height: 100%;
+    height: 50px;
+    background: #fff;
+    font: 500 15px 'Roboto', sans-serif;
+    box-shadow: 0 -5px 10px 0 rgba(0, 0, 0, .05);
+    margin: var(--slide) 0 0 0;
+    transition: all .2s ease-in-out;
 }
 
-.tabs li a:active {
-    opacity: .5;
+.tab:hover ul a {
+    --slide: 0;
 }
 
-.tabs li:nth-child(2) { --tab: #ff7ea2; }
-.tabs li:nth-child(3) { --tab: #7afec1; }
-.tabs li:nth-child(4) { --tab: #b95eff; }
+.tab ul a:hover {
+    background: #eee;
+    box-shadow: none;
+}
 
-.tabs li:hover {
+.tab:hover i { color: var(--tab); }
+
+.tabs ul:nth-child(2) i { --tab: #ff7ea2; }
+.tabs ul:nth-child(3) i { --tab: #7afec1; }
+.tabs ul:nth-child(4) i { --tab: #b95eff; }
+
+.tab:hover i {
     --size: -10px;
     z-index: 1;
-    margin: -10px 0 0 0;
+    /*margin: -10px 0 0 0;*/
     height: 60px;
-    box-shadow: inset 0 var(--size) var(--tab),
-                0 0 10px rgba(0, 0, 0, .07);
 }
 
 #search {
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -207,12 +235,16 @@ body {
 
 #search input {
     width: 100%;
-    box-shadow: inset 0 -2px #2f3333;
+    box-shadow: inset 0 -2px #a0a0a0;
     padding: .5em 0;
     background: none;
     font: 500 22px 'Roboto', sans-serif;
     letter-spacing: 1px;
     color: #000;
+}
+
+#search input:focus {
+    box-shadow: inset 0 -2px #2f3333;
 }
 
 #search input::selection {
@@ -258,55 +290,43 @@ body {
 
 .search-engines li.active {
     color: #000;
-    font-weight: bold;
+    font-weight: 700;
 }
 
-.pages {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.pages > div {
+.wave,
+.wave::before,
+.wave::after {
+    content: '';
     position: absolute;
-    width: 100%;
-    height: 90%;
-    left: -100%;
-    transition: all 1s ease-in-out;
+    top: 50%;
+    left: 50%;
+    width: 250vw;
+    height: 250vw;
+    margin-left: -125vw;
+    transform-origin: 50% 50%;
+    background: linear-gradient(to bottom, rgba(118, 222, 223, 0.2), transparent);
+    border-radius: 38% 42%;
+    animation: spin 16s infinite linear;
 }
 
-.pages > div:target {
-    left: 0;
+.wave::before {
+    width: 105%;
+    height: 95%;
+    margin-top: -125vw;
+    transform-origin: 49% 51%;
+    border-radius: 40% 38%;
+    animation: spin 13s infinite linear;
 }
 
-.pages > div ul {
-    width: 70%;
-    margin: 2em 0 0 1em;
+.wave::after {
+    width: 102%;
+    height: 98%;
+    margin-top: -125vw;
+    transform-origin: 51% 49%;
+    border-radius: 48% 42%;
+    animation: spin 10s infinite linear;
 }
 
-.pages > div li {
-    position: relative;
-    width: 100%;
-    background: #fff;
-    padding: .6em 0 .6em 1em;
-    border-radius: 2px;
-    margin-bottom: 2px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, .1);
-    z-index: 1;
-}
-
-.pages > div li a {
-    font: 600 14px 'Roboto', sans-serif;
-    color: #84838c;
-}
-
-.pages > div li a::before {
-    content: '> ';
-    float: left;
-    display: none;
-}
-
-.pages > div li:hover a::before {
-    display: block;
+@keyframes spin {
+    100% { transform: rotate(360deg); }
 }
