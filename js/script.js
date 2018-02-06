@@ -4,7 +4,9 @@ const $A = (e) => document.querySelectorAll(e);
 (function() {
     'use strict';
 
-    var location = "new york";
+    var location = localStorage.location || "new york";
+
+    document.body.setAttribute('style', `--accent: ${localStorage.accent || '#76dedf'}`);
 
     function engines () {
         return {
@@ -26,6 +28,11 @@ const $A = (e) => document.querySelectorAll(e);
     for (var key in engines)
         $('.search-engines').innerHTML += `<li><p title="${engines[key][1]}">!${key}</p></li>`;
 
+    $('.open-search').onclick = () =>
+        search.classList.add('active');
+
+    $('#search .close').onclick = () => search.classList.remove('active');
+
     document.onkeypress = (e) => {
         if (e.key == 's')
             search.classList.add('active');
@@ -33,7 +40,8 @@ const $A = (e) => document.querySelectorAll(e);
         input.focus();
         input.scrollIntoView();
 
-        $('.close').onclick = (e) => search.classList.remove('active');
+        $('#search .close').onclick = () =>
+            search.classList.remove('active');
 
         search.onkeyup = (e) => {
             let args   = e.target.value.split(' '),
@@ -112,4 +120,33 @@ const $A = (e) => document.querySelectorAll(e);
         weatherRequest.send();
     }
     fetchWeather();
+
+    // +--------+
+    // | CONFIG |
+    // +--------+
+    $('.open-config').onclick = () =>
+        $('.settings').classList.add('active');
+
+    $('.config .close').onclick = () =>
+        $('.settings').classList.remove('active');
+
+    $('input[name=accent]').onkeyup = (e) => {
+        let color = e.target.value;
+
+        e.target.setAttribute("style", `--accent: ${color}`);
+
+        if (e.key == 'Enter') {
+            localStorage.accent = color;
+            window.location.reload();
+        }
+    };
+
+    $('input[name=location]').onkeyup = (e) => {
+        let location = e.target.value;
+
+        if (e.key == 'Enter') {
+            localStorage.location = location;
+            window.location.reload();
+        }
+    };
 })();

@@ -405,3 +405,105 @@ body {
     font-weight: 700;
     font-size: 24px;
 }
+
+.settings {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*background: rgba(255, 255, 255, .8);*/
+    background: rgba(0, 0, 0, .7);
+    width: 100%;
+    height: 100%;
+    top: -150%;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .8s ease-in-out;
+    z-index: 99;
+}
+
+.config {
+    position: absolute;
+    width: 400px;
+    height: 220px;
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .1);
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.settings.active {
+    top: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.config .close {
+    background: 0;
+    border: 0;
+    height: 24px;
+    float: right;
+    outline: 0;
+    cursor: pointer;
+}
+
+.config .close:hover {
+    opacity: .5;
+}
+
+.config h1 {
+    font: 500 14px 'Roboto', sans-serif;
+    text-transform: uppercase;
+    padding: 4px;
+}
+
+.accent-color {
+    margin: 1.5em 0 1em 0;
+}
+
+.config input {
+    width: calc(100% - 20px);
+    border: 0;
+    outline: 0;
+    box-shadow: 0 1px #ccc;
+    background: 0;
+    transition: all .1s;
+    padding: .5em 0;
+    font: 400 13px 'Roboto', sans-serif;
+}
+
+.config input:focus {
+    box-shadow: 0 2px var(--accent);
+}
+
+.config label {
+    font: 500 10px 'Roboto', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: grey;
+}
+
+.open-config, .open-search {
+    background: 0;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    height: 24px;
+    transition: all .3s;
+    color: grey;
+}
+
+.open-search:hover {
+    color: #000;
+}
+
+.open-config:hover {
+    transform: rotate(90deg);
+    color: #000;
+}
+
+.tools {
+    display: flex;
+    justify-content: space-between;
+    padding: .5em;
+}
