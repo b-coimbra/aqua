@@ -75,7 +75,7 @@ const $A = (e) => document.querySelectorAll(e);
     // +---------+
     function fetchWeather() {
         var weatherRequest = new XMLHttpRequest();
-        var url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=50a34e070dd5c09a99554b57ab7ea7e2`;
+        var url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=50a34e070dd5c09a99554b57ab7ea7e2`;
 
         weatherRequest.open('GET', url, true);
 
