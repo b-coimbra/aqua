@@ -4,6 +4,8 @@ const $A = (e) => document.querySelectorAll(e);
 (function() {
     'use strict';
 
+    var location = "new york";
+
     function engines () {
         return {
             g: ['https://google.com/search?q=', 'Google'],
@@ -64,5 +66,50 @@ const $A = (e) => document.querySelectorAll(e);
 
     setTime($('p[hour]'), strftime('h'));
     setTime($('p[mins]'), strftime(':M'));
-    setTime($('p[ord]'),  strftime('p'));
+    setTime($('p[ord]'), strftime('p'));
+    setTime($('p[month]'), strftime('b'));
+    setTime($('p[day]'), strftime('d'));
+
+    // +---------+
+    // | WEATHER |
+    // +---------+
+    function fetchWeather() {
+        var weatherRequest = new XMLHttpRequest();
+        var url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=50a34e070dd5c09a99554b57ab7ea7e2`;
+
+        weatherRequest.open('GET', url, true);
+
+        weatherRequest.onload = function() {
+            if (this.status >= 200 && this.status < 400) {
+                let weather = JSON.parse(this.response);
+
+                let temperature    = weather.main.temp.toString(),
+                    currentTemp    = (temperature.indexOf('-') != 0 && temperature.indexOf('.') != 2 && temperature.length != 2) ? temperature.substr(0, 1)  : temperature.substr(0, 2),
+                    currentWeather = weather.weather[0].main;
+
+                $('.weather p').innerHTML = currentTemp + '&ordm;'
+                $('.stats p[location]').innerHTML = location + ', ' + weather.sys.country;
+                $('.stats p[description]').innerHTML = currentWeather;
+
+                if (currentWeather == 'Clouds' || currentWeather == 'Mist')
+                    $('.weather p[weather]').innerHTML = '<i class="material-icons" cloudy>cloud_queue</i>';
+                else if (currentWeather == 'Drizzle')
+                    $('.weather p[weather]').innerHTML = '<i class="material-icons" cloudy>opacity</i>';
+                else
+                    $('.weather p[weather]').innerHTML = '<i class="material-icons" sunny>wb_sunny</i>';
+            }
+            else {
+                console.log("Weather API returned an error: " + this.response);
+                callback(null);
+            }
+        };
+
+        weatherRequest.onerror = () => {
+            console.log("Request to weather API failed.");
+            callback(null);
+        };
+
+        weatherRequest.send();
+    }
+    fetchWeather();
 })();
