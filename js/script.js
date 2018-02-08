@@ -34,37 +34,39 @@ const $A = (e) => document.querySelectorAll(e);
     $('#search .close').onclick = () => search.classList.remove('active');
 
     document.onkeypress = (e) => {
-        if (e.key == 's')
-            search.classList.add('active');
+        if (!$('.settings').classList.contains('active')) {
+            if (e.key == 's')
+                search.classList.add('active');
 
-        input.focus();
-        input.scrollIntoView();
+            input.focus();
+            input.scrollIntoView();
 
-        $('#search .close').onclick = () =>
-            search.classList.remove('active');
-
-        search.onkeyup = (e) => {
-            let args   = e.target.value.split(' '),
-                prefix = args[0],
-                engine = engines['g'][0], // default engine
-                str    = 0;
-
-            $A('.search-engines li p').forEach((eng) => {
-                let current = eng.parentNode;
-
-                (prefix == eng.innerHTML)
-                    ? current.classList.add('active')
-                    : current.classList.remove('active');
-            });
-
-            if (e.key == 'Enter') {
-                if (prefix.indexOf('!') == 0)
-                    (engine = engines[prefix.substr(1)][0], str = 3);
-
-                window.location = engine + args.join(' ').substr(str).toString().replace(/\s+/m, '%20');
-            } else if (e.keyCode == 27)
+            $('#search .close').onclick = () =>
                 search.classList.remove('active');
-        };
+
+            search.onkeyup = (e) => {
+                let args   = e.target.value.split(' '),
+                    prefix = args[0],
+                    engine = engines['g'][0], // default engine
+                    str    = 0;
+
+                $A('.search-engines li p').forEach((eng) => {
+                    let current = eng.parentNode;
+
+                    (prefix == eng.innerHTML)
+                        ? current.classList.add('active')
+                        : current.classList.remove('active');
+                });
+
+                if (e.key == 'Enter') {
+                    if (prefix.indexOf('!') == 0)
+                        (engine = engines[prefix.substr(1)][0], str = 3);
+
+                    window.location = engine + args.join(' ').substr(str).toString().replace(/\s+/m, '%20');
+                } else if (e.keyCode == 27)
+                    search.classList.remove('active');
+            };
+        }
     };
 
     // +-------+
@@ -101,7 +103,7 @@ const $A = (e) => document.querySelectorAll(e);
 
                 if (currentWeather == 'Clouds' || currentWeather == 'Mist')
                     $('.weather p[weather]').innerHTML = '<i class="material-icons" cloudy>cloud_queue</i>';
-                else if (currentWeather == 'Drizzle')
+                else if (currentWeather == 'Drizzle' || currentWeather == 'Snow')
                     $('.weather p[weather]').innerHTML = '<i class="material-icons" cloudy>opacity</i>';
                 else
                     $('.weather p[weather]').innerHTML = '<i class="material-icons" sunny>wb_sunny</i>';
