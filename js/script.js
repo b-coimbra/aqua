@@ -31,7 +31,8 @@ const $A = (e) => document.querySelectorAll(e);
     $('.open-search').onclick = () =>
         search.classList.add('active');
 
-    $('#search .close').onclick = () => search.classList.remove('active');
+    $('#search .close').onclick = () =>
+        search.classList.remove('active');
 
     document.onkeypress = (e) => {
         if (!$('.settings').classList.contains('active')) {
@@ -83,7 +84,7 @@ const $A = (e) => document.querySelectorAll(e);
     // +---------+
     // | WEATHER |
     // +---------+
-    function fetchWeather() {
+    function fetchWeather(callback) {
         var weatherRequest = new XMLHttpRequest();
         var url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=50a34e070dd5c09a99554b57ab7ea7e2`;
 
@@ -97,11 +98,11 @@ const $A = (e) => document.querySelectorAll(e);
                     currentTemp    = (temperature.indexOf('-') != 0 && temperature.indexOf('.') != 2 && temperature.length != 2) ? temperature.substr(0, 1)  : temperature.substr(0, 2),
                     currentWeather = weather.weather[0].main;
 
-                $('.weather p').innerHTML = currentTemp + '&ordm;'
+                $('.weather p').innerHTML = currentTemp
                 $('.stats p[location]').innerHTML = location + ', ' + weather.sys.country;
                 $('.stats p[description]').innerHTML = currentWeather;
 
-                if (currentWeather == 'Clouds' || currentWeather == 'Mist')
+                if (currentWeather == 'Clouds' || currentWeather == 'Mist' || currentWeather == 'Haze')
                     $('.weather p[weather]').innerHTML = '<i class="material-icons" cloudy>cloud_queue</i>';
                 else if (currentWeather == 'Drizzle' || currentWeather == 'Snow')
                     $('.weather p[weather]').innerHTML = '<i class="material-icons" cloudy>opacity</i>';

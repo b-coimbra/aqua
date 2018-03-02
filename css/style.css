@@ -84,7 +84,7 @@ body {
     width: 90px;
     grid-column: weather;
     background: var(--accent);
-    font: 500 41px 'Lemon/Milk light', sans-serif;
+    font: 700 41px 'Roboto', sans-serif;
     position: relative;
     overflow: hidden;
 }
@@ -93,6 +93,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.clock .weather p:first-child::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    box-shadow: 0 0 0 4px white;
+    border-radius: 50%;
+    top: .4em;
+    right: .4em;
 }
 
 .wrapper {
@@ -164,6 +176,7 @@ body {
     cursor: pointer;
     width: 100%;
     height: 50px;
+    color: #525252;
     background: #fff;
     box-shadow: inset 0 var(--size) var(--tab);
     transition: all .3s ease-in-out;
@@ -507,3 +520,5 @@ body {
     justify-content: space-between;
     padding: .5em;
 }
+
+.weather p[weather], .stats { bottom: 0; }
