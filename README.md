@@ -1,7 +1,5 @@
 # Aqua
 
-Work in progress.
-
 [Live preview](https://b-coimbra.github.io/aqua/?)
 
 ## Preview
